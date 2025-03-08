@@ -30,6 +30,12 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!--pageHelper坐标-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.4.6</version>
+		</dependency>
 		<!--java-jwt-->
 		<dependency>
 			<groupId>com.auth0</groupId>
