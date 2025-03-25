@@ -2,6 +2,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import {useRouter} from 'vue-router'
 //控制显示注册/登录
 const isRegister = ref(true)
 
@@ -50,6 +51,9 @@ const register = async () => {
 }
 
 //登录函数
+import { useTokenStore } from '@/stores/token.js'
+const router = useRouter()
+const tokenStore = useTokenStore()
 const login = async () => {
     // 调用接口
     let result = await userLoginService(registerData.value);
@@ -59,6 +63,10 @@ const login = async () => {
     //     alert('登录失败')
     // }
     ElMessage.success(result.msg ? result.msg : '登录成功');
+    //把得到的token存到pinia中
+    tokenStore.setToken(result.data)
+    router.push('/')
+
 }
 
 //清空数据
@@ -143,10 +151,10 @@ const clearRegisterData = () => {
     padding: 0;
     margin: 0;
 }
-
 .common-layout {
     height: 100%;
     width: 100%;
+
 }
 
 .bg-purple {

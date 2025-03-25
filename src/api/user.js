@@ -19,3 +19,18 @@ export const userLoginService = (loginData) => {
     }
     return request.post('/user/login', params)
 }
+
+//获取详细信息
+export const userInfoService = () => {
+    return request.get('/user/userInfo')
+}
+
+//修改个人信息
+export const userInfoUpdateService = (userInfoData) => {
+    return request.put('/user/update', userInfoData)
+}
+
+//修改密码
+export const userPasswordUpdateService = (passwordData) => {
+    return request.patch('/user/updatePwd', passwordData);
+} 
