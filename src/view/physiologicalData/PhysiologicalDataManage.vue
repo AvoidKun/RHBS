@@ -90,8 +90,8 @@ const rules = {
   bloodPressure: [
     { required: true, message: "请输入血压", trigger: "blur" },
     {
-      pattern: /^(100|1[0-9][0-9]|200)$/,
-      message: "请输入100-200之间的整数",
+      pattern: /^([6-9][0-9]|100|1[0-9][0-9]|200)$/,
+      message: "请输入60-200之间的整数",
       trigger: "blur",
     },
   ],
@@ -104,7 +104,7 @@ const rules = {
     },
   ],
   height: [
-    { required: false, message: "请输入身高", trigger: "blur" },
+    { required: true, message: "请输入身高", trigger: "blur" },
     {
       pattern: /^(1[0-9][0-9]|2[0-4][0-9]|250)$/,
       message: "请输入100-250之间的整数",
@@ -112,7 +112,7 @@ const rules = {
     },
   ],
   weight: [
-    { required: false, message: "请输入体重", trigger: "blur" },
+    { required: true, message: "请输入体重", trigger: "blur" },
     {
       pattern: /^([2-9][0-9]|1[0-9][0-9]|200)$/,
       message: "请输入20-200之间的整数",
@@ -322,7 +322,7 @@ const deleteData = (row) => {
   </el-card>
 </template>
 
-<style>
+<style scoped>
 .page-container {
   width: 99%;
   height: 99%;

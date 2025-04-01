@@ -81,6 +81,12 @@ const handleCommand=(command)=>{
                     </el-icon>
                     <span>健康数据</span>
                 </el-menu-item>
+                <el-menu-item index="/physiologicalData/Chart"> 
+                    <el-icon>
+                        <EditPen />
+                    </el-icon>
+                    <span>健康档案</span>
+                </el-menu-item>
                 <el-menu-item index="/article/manage">
                     <el-icon>
                         <Promotion />
