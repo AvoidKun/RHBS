@@ -1,6 +1,7 @@
 package com.avoid.phbs.model;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,8 @@ public class PhysiologicalData {
     private String weight;//体重
     private String step;//步数
     private String sleep;//睡眠
+    @Pattern(regexp = "^(健康|不健康)$")
+    private String state;//发布状态 健康|不健康
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
