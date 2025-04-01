@@ -11,6 +11,7 @@ import ArticleManageVue from '@/view/article/ArticleManage.vue';
 import UserAvatarVue from '@/view/user/UserAvatar.vue';
 import UserInfoVue from '@/view/user/UserInfo.vue';
 import UserResetPasswordVue from '@/view/user/UserResetPassword.vue';
+import PhysiologicalDataManageVue from '@/view/physiologicalData/PhysiologicalDataManage.vue'
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -30,6 +31,9 @@ const routes = [
             },
             {
                 path:'/user/resetPassword',component:UserResetPasswordVue
+            },
+            {
+                path:'/physiologicalData/info',component:PhysiologicalDataManageVue
             }
         ]
     }
