@@ -7,7 +7,8 @@ import {
     Crop,
     EditPen,
     SwitchButton,
-    CaretBottom
+    CaretBottom,
+    Message 
 } from '@element-plus/icons-vue'
 
 import avatar from '@/assets/3.jpg'
@@ -121,6 +122,10 @@ const handleCommand=(command)=>{
                         <span>重置密码</span>
                     </el-menu-item>
                 </el-sub-menu>
+                <el-menu-item index="/evaluation/manage"> 
+                    <el-icon><Message /></el-icon>
+                    <span>服务评价</span>
+                </el-menu-item>
             </el-menu>
 
         </el-aside>

@@ -101,6 +101,7 @@ const showDrawer = (row) => {
 };
 const updateArticle = async (clickState) => {
   articleModel.value.state = clickState;
+  articleModel.value.content = articleModel.value.content.replace(/<p[^>]*>|<\/p>/g, "");
   // console.log(articleModel.value);
   let result = await articleUpdateService(articleModel.value);
   ElMessage.success(result.msg ? result.msg : "修改成功");

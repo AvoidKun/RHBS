@@ -11,6 +11,7 @@ import UserInfoVue from '@/view/user/UserInfo.vue';
 import UserResetPasswordVue from '@/view/user/UserResetPassword.vue';
 import PhysiologicalDataManageVue from '@/view/physiologicalData/PhysiologicalDataManage.vue'
 import PhysiologicalChartVue from '@/view/physiologicalData/PhysiologicalChart.vue'
+import EvaluationManageVue from '@/view/evaluation/EvaluationManage.vue';
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -36,6 +37,9 @@ const routes = [
             },
             {
                 path:'/physiologicalData/Chart',component:PhysiologicalChartVue
+            },
+            {
+                path:'/evaluation/manage',component:EvaluationManageVue
             }
         ]
     }
