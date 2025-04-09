@@ -19,7 +19,7 @@ public interface EvaluationMapper {
     List<Evaluation> list(Integer userId, String state);
 
     //改
-    @Update("update evaluation set type=#{type},rating=#{rating},content=#{content},state=#{state},update_time=#{updateTime}")
+    @Update("update evaluation set type=#{type},rating=#{rating},content=#{content},state=#{state},update_time=#{updateTime} where id=#{id}")
     void update(Evaluation evaluation);
 
     //删
