@@ -13,7 +13,7 @@ public interface CategoryMapper {
     void add(Category category);
 
     //查询
-    @Select("select * from category where create_user = #{userId}")
+    @Select("select * from category")
     List<Category> list(Integer userId);
 
     //根据文章id查询文章
