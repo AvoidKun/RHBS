@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 // import ArticleVue from './components/Article.vue'
 import LoginVue from '@/view/login.vue'
 import layoutVue from '@/view/layout.vue';
+import AdminVue from '@/view/admin.vue'
 import ArticleCategoryVue from '@/view/article/ArticleCategory.vue'
 import ArticleManageVue from '@/view/article/ArticleManage.vue';
 import UserAvatarVue from '@/view/user/UserAvatar.vue';
@@ -12,6 +13,11 @@ import UserResetPasswordVue from '@/view/user/UserResetPassword.vue';
 import PhysiologicalDataManageVue from '@/view/physiologicalData/PhysiologicalDataManage.vue'
 import PhysiologicalChartVue from '@/view/physiologicalData/PhysiologicalChart.vue'
 import EvaluationManageVue from '@/view/evaluation/EvaluationManage.vue';
+
+import AdminCategoryVue from '@/view/category/AdminCategory.vue';
+import AdminAvatarVue from '@/admin/AdminAvatar.vue';
+import AdminInfoVue from '@/admin/AdminInfo.vue';
+import AdminResetpasswordVue from '@/admin/AdminResetpassword.vue';
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -42,6 +48,23 @@ const routes = [
                 path:'/evaluation/manage',component:EvaluationManageVue
             }
         ]
+    },
+    {
+        path:'/admin',component:AdminVue,redirect:"/admin/category", children: [
+            {
+                path:'/admin/category',component:AdminCategoryVue
+            },
+            {
+                path:'/admin/info',component:AdminInfoVue
+            },
+            {
+                path:'/admin/avatar',component:AdminAvatarVue
+            },
+            {
+                path:'/admin/resetPassword',component:AdminResetpasswordVue
+            }
+        ]
+        
     }
 
 ]
