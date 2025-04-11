@@ -18,6 +18,7 @@ import AdminCategoryVue from '@/view/category/AdminCategory.vue';
 import AdminAvatarVue from '@/admin/AdminAvatar.vue';
 import AdminInfoVue from '@/admin/AdminInfo.vue';
 import AdminResetpasswordVue from '@/admin/AdminResetpassword.vue';
+import AdminMedicinesVue from '@/view/medicines/AdminMedicines.vue';
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -62,6 +63,9 @@ const routes = [
             },
             {
                 path:'/admin/resetPassword',component:AdminResetpasswordVue
+            },
+            {
+                path:'/admin/medicines',component:AdminMedicinesVue
             }
         ]
         

@@ -2,88 +2,85 @@
 import { ref } from "vue";
 import { Edit, Delete } from "@element-plus/icons-vue";
 import {
-  evaluationListService,
-  evaluationAddService,
-  evaluationUpdateService,
-  evaluationDeleteService,
-} from "@/api/evaluation.js";
-const evaluation = ref([]);
+  medicinesListService,
+  medicinesAddService,
+  medicinesUpdateService,
+  medicinesDeleteService,
+} from "@/api/medicines.js";
+const medicines = ref([]);
 const state = ref("");
 const titles = ref("");
 //分页
 const pageNum = ref(1);
 const total = ref(20);
 const pageSize = ref(3);
-//当每页条发生了变化
 const onSizeChange = (size) => {
   pageSize.value = size;
-  evaluationList();
+  medicinesList();
 };
 const onCurrentChange = (num) => {
   pageNum.value = num;
-  evaluationList();
+  medicinesList();
 };
 const visibleDrawer = ref(false);
-const evaluationList = async () => {
+const medicinesList = async () => {
   let params = {
     pageNum: pageNum.value,
     pageSize: pageSize.value,
     state: state.value ? state.value : null,
   };
-  let result = await evaluationListService(params);
+  let result = await medicinesListService(params);
   total.value = result.data.total;
-  evaluation.value = result.data.items;
-  // console.log(evaluation.value);
+  medicines.value = result.data.items;
 };
+medicinesList();
 
-const evaluationModel = ref({
-  type: "",
-  rating: "",
-  content: "",
+const medicinesModel = ref({
+  medicinename: "",
+  genericname: "",
+  description: "",
   state: "",
 });
-//添加数据
+//添加
 import { ElMessage, ElMessageBox } from "element-plus";
-const addEvaluation = async (clickState) => {
-  evaluationModel.value.state = clickState;
-  let result = await evaluationAddService(evaluationModel.value);
+const addMedicines = async (clickState) => {
+  medicinesModel.value.state = clickState;
+  let result = await medicinesAddService(medicinesModel.value);
   ElMessage.success(result.msg ? result.msg : "添加成功");
   visibleDrawer.value = false;
-  evaluationList();
+  medicinesList();
 };
-evaluationList();
-
-//修改
+//改
 const showDrawer = (row) => {
   visibleDrawer.value = true;
-  titles.value = "修改评价";
-  evaluationModel.value.type = row.type;
-  evaluationModel.value.rating = row.rating;
-  evaluationModel.value.content = row.content;
-  evaluationModel.value.id = row.id;
+  titles.value = "修改药品";
+  medicinesModel.value.medicinename = row.medicinename;
+  medicinesModel.value.genericname = row.genericname;
+  medicinesModel.value.description = row.description;
+  medicinesModel.value.id = row.id;
 };
-const updateEvaluation = async(clickState)=>{
-    evaluationModel.value.state = clickState;
-    let result = await evaluationUpdateService(evaluationModel.value);
-    ElMessage.success(result.msg ? result.msg : "修改成功");
-    visibleDrawer.value = false;
-    evaluationList();
-}
+const updateMedicines = async (clickState) => {
+  medicinesModel.value.state = clickState;
+  let result = await medicinesUpdateService(medicinesModel.value);
+  ElMessage.success(result.msg ? result.msg : "修改成功");
+  visibleDrawer.value = false;
+  medicinesList();
+};
 const clearDate = () => {
- evaluationModel.value.type=""
- evaluationModel.value.rating=""
- evaluationModel.value.content=""
- evaluationModel.value.state=""
+  medicinesModel.value.medicinename = "";
+  medicinesModel.value.genericname= "";
+//   medicinesModel.value.state = "";
+  medicinesModel.value.description = "";
 };
 //删除
 const deleteDate = (row)=>{
-    ElMessageBox.confirm("你确认要删除该文章吗？","温馨提示",{
+    ElMessageBox.confirm("你确认要删除该药品吗？","温馨提示",{
         confirmButtonText:'确认',
         cancelButtonText:'取消',
         type:"warning"
     })
     .then(async()=>{
-        let result = await evaluationDeleteService(row.id);
+        let result = await medicinesDeleteService(row.id);
         ElMessage({
             type:"success",
             message:"删除成功",
@@ -109,38 +106,39 @@ const deleteDate = (row)=>{
             round
             @click="
               visibleDrawer = true;
-              titles = '添加评价';
+              titles = '添加药品';
               clearDate();
             "
           >
-            添加评价</el-button
+            添加药品</el-button
           >
         </div>
       </div>
     </template>
     <el-form :inline="true">
-      <el-form-item label="评价状态">
+      <el-form-item label="药品状态">
         <el-select placeholder="请选择" clearable v-model="state">
-          <el-option label="赞美" value="赞美" />
-          <el-option label="投诉" value="投诉" />
+          <el-option label="盈余" value="盈余" />
+          <el-option label="告罄" value="告罄" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="evaluationList">搜索</el-button>
+        <el-button type="primary" @click="medicinesList">搜索</el-button>
         <el-button
           @click="
             categoryId = '';
             state = '';
-            evaluationList()
+            medicinesList();
           "
           >重置</el-button
         >
       </el-form-item>
     </el-form>
-    <el-table :data="evaluation">
+    <el-table :data="medicines">
       <el-table-column type="index" label="序号" width="140" />
-      <el-table-column label="评价类型" prop="type"></el-table-column>
-      <el-table-column label="状态" prop="state" width="300"> </el-table-column>
+      <el-table-column label="药品名" prop="medicinename"></el-table-column>
+      <el-table-column label="俗名" prop="genericname"></el-table-column>
+      <el-table-column label="状态" prop="state"> </el-table-column>
       <el-table-column label="发布时间" prop="createTime"></el-table-column>
       <el-table-column label="操作" width="120">
         <template #default="{ row }">
@@ -161,6 +159,7 @@ const deleteDate = (row)=>{
         </template>
       </el-table-column>
     </el-table>
+
     <el-pagination
       v-model:current-page="pageNum"
       v-model:page-size="pageSize"
@@ -174,20 +173,24 @@ const deleteDate = (row)=>{
       @current-change="onCurrentChange"
       style="margin-top: 20px; justify-content: flex-end"
     />
+
     <el-drawer v-model="visibleDrawer" :title="titles" size="40%">
-      <el-form :Model="evaluationModel" label-width="120px">
-        <el-form-item label="评价类型">
+      <el-form :Model="medicinesModel" label-width="120px">
+        <el-form-item label="药品名称">
           <el-input
-            v-model="evaluationModel.type"
-            placeholder="请您输入需要提交的评价类型"
+            v-model="medicinesModel.medicinename"
+            placeholder="请您输入需要提交的药品名称"
           ></el-input>
         </el-form-item>
-        <el-form-item label="评分等级">
-          <el-rate v-model="evaluationModel.rating" />
-        </el-form-item>
-        <el-form-item label="评论内容">
+        <el-form-item label="药品别名">
           <el-input
-            v-model="evaluationModel.content"
+            v-model="medicinesModel.genericname"
+            placeholder="请您输入需要提交的药品的别名"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="药品效果">
+          <el-input
+            v-model="medicinesModel.description"
             style="width: 100%"
             :rows="2"
             type="textarea"
@@ -196,17 +199,13 @@ const deleteDate = (row)=>{
         <el-form-item>
           <el-button
             type="primary"
-            @click="
-              titles == '添加评价' ? addEvaluation('赞美') : updateEvaluation('赞美')
-            "
-            >赞美</el-button
+            @click="titles == '添加药品' ? addMedicines('盈余') : updateMedicines('盈余')"
+            >盈余</el-button
           >
           <el-button
             type="info"
-            @click="
-              titles == '添加评价' ? addEvaluation('投诉') : updateEvaluation('投诉')
-            "
-            >投诉</el-button
+            @click="titles == '添加药品' ? addMedicines('告罄') : updateMedicines('告罄')"
+            >告罄</el-button
           >
         </el-form-item>
       </el-form>

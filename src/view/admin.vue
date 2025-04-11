@@ -67,13 +67,13 @@ const handleCommand = (command) => {
           </el-icon>
           <span>文章分类</span>
         </el-menu-item>
-        <!-- <el-menu-item>
+        <el-menu-item index="/admin/medicines">
           <el-icon>
             <EditPen />
           </el-icon>
-          <span>健康数据</span>
+          <span>药物分类</span>
         </el-menu-item>
-        <el-menu-item>
+         <!--<el-menu-item>
           <el-icon>
             <EditPen />
           </el-icon>
