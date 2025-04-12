@@ -2,129 +2,126 @@
 import { ref } from "vue";
 import { Edit, Delete } from "@element-plus/icons-vue";
 import {
-  announcementCategoryListService,
-  announcementListService,
-  announcementAddService,
-  announcementUpdateService,
-  announcementDeleteService,
-} from "@/api/announcement.js";
-// import {
-//     userInfoUpdateService
-// }from '@/api/user.js'
-const categories = ref([]);
-// 公告列表数据模型
-const announcements = ref([]);
+  adviceListService,
+  adviceAddService,
+  adviceUpdateService,
+  adviceDeleteService,
+} from "@/api/advice.js";
+import {
+    userInfoService
+} from '@/api/user.js'
+//用户列表数据
+const users = ref([]);
+//建议数据
+const advices = ref([]);
 //分页数据
 const pageNum = ref(1); //当前页
 const total = ref(20); //总
 const pageSize = ref(3); //每页
 const onSizeChange = (size) => {
   pageSize.value = size;
-  announcementList();
+  adviceList();
 };
 //当前页码发生变化，调用此函数
 const onCurrentChange = (num) => {
   pageNum.value = num;
-  announcementList();
+  adviceList();
 };
-
-// const userId = ref("");
-//管理员搜索时选中的分类id
-const announcementCategoryId = ref("");
-//管理员搜索时选中的发布状态
+//管理员输入用户的名字
+//think....
+const userId = ref("");
+//管理员搜索选中的发布状态
 const state = ref("");
-const announcementCategoryList = async () => {
-  let result = await announcementCategoryListService();
-  categories.value = result.data;
-};
-const announcementList = async () => {
+const userInfo = async()=>{
+    let result = await userInfoService();
+    users.value = result.data;
+    console.log(userId.value)
+}
+const adviceList = async () => {
   let params = {
     pageNum: pageNum.value,
     pageSize: pageSize.value,
-    announcementCategoryId: announcementCategoryId.value
-      ? announcementCategoryId.value
-      : null,
+    userId: userId.value ? userId.value : null,
     state: state.value ? state.value : null,
   };
-  let result = await announcementListService(params);
-  // console.log(result.data)
+  let result = await adviceListService(params);
+  //   console.log(result.data)
   total.value = result.data.total;
-  announcements.value = result.data.items;
-  // console.log(announcements.value)
-  for (let i = 0; i < announcements.value.length; i++) {
-    let announcement = announcements.value[i];
-    for (let j = 0; j < categories.value.length; j++) {
-      if (announcement.announcementCategoryId == categories.value[j].id) {
-        announcement.categoryName = categories.value[j].categoryName;
-        // console.log(announcement);
-      }
+  advices.value = result.data.items;
+  
+  for(let i =0;i<advices.value.length;i++){
+    let advice = advices.value[i];
+    for(let j =0 ;j<users.value.length;j++){
+        if(advice.userId==users.value[j].id){
+            advice.userName = users.value[j].userName;
+            console.log(advice)
+        }
     }
   }
-
 };
-announcementCategoryList();
-announcementList();
+userInfo();
+adviceList();
+
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 //控制抽屉是否显示
 const visibleDrawer = ref(false);
-const announcementModel = ref({
+const adviceModel = ref({
   title: "",
-  announcementCategoryId: "",
+  userId: "",
   content: "",
   state: "",
 });
 
-//添加公告
+//增
 import { ElMessage, ElMessageBox } from "element-plus";
-const addAnnouncement = async (clickState) => {
-  announcementModel.value.state = clickState;
-  announcementModel.value.content = announcementModel.value.content.replace(
-    /<p[^>]*>|<\/p>/g,
-    ""
-  );
-  let result = await announcementAddService(announcementModel.value);
+const addAdvice = async (clickState) => {
+  adviceModel.value.state = clickState;
+  adviceModel.value.content = adviceModel.value.content.replace(/<p[^>]*>|<\/p>/g, "");
+  let result = await adviceAddService(adviceModel.value);
   ElMessage.success(result.msg ? result.msg : "添加成功");
 
   visibleDrawer.value = false;
-  announcementList();
+  adviceList();
 };
+//改
 const titles = ref("");
 const showDrawer = (row) => {
   visibleDrawer.value = true;
-  titles.value = "修改公告";
-  announcementModel.value.title = row.title;
-  announcementModel.value.announcementCategoryId = row.announcementCategoryId;
-  announcementModel.value.content = row.content;
-  announcementModel.value.id = row.id;
+  titles.value = "修改建议";
+  adviceModel.value.title = row.title;
+  adviceModel.value.userId = row.userId;
+  adviceModel.value.content = row.content;
+  adviceModel.value.id = row.id;
 };
-const updateAnnouncement = async(clickState)=>{
-  announcementModel.value.state = clickState;
-  announcementModel.value.content = announcementModel.value.content.replace(/<p[^>]*>|<\/p>/g, "")
-  result=await announcementUpdateService(announcementModel.value);
+const updateAdvice = async (clickState) => {
+  adviceModel.value.state = clickState;
+  adviceModel.value.content = adviceModel.value.content.replace(/<p[^>]*>|<\/p>/g, "");
+  let result = await adviceUpdateService(adviceModel.value);
   ElMessage.success(result.msg ? result.msg : "修改成功");
   visibleDrawer.value = false;
-  announcementList();
-}
-const clearDate = () => {
-  announcementModel.value.title = "";
-  announcementModel.value.announcementCategoryId = "";
-  announcementModel.value.content = "<p></p>";
-  announcementModel.value.state = "";
+  adviceList();
 };
-const deleteAnnouncement = (row) => {
-  ElMessageBox.confirm("你确认要删除该公告吗？", "温馨提示", {
+const clearDate = () => {
+  adviceModel.value.title = "";
+  adviceModel.value.userId = "";
+  adviceModel.value.content = "<p></p>";
+  adviceModel.value.state = "";
+};
+//删
+const deleteAdvice= (row) => {
+  ElMessageBox.confirm("你确认要删除该建议吗？", "温馨提示", {
     confirmButtonText: "确认",
     cancelButtonText: "取消",
     type: "warning",
   })
     .then(async () => {
-      let result = await announcementDeleteService(row.id);
+      let result = await adviceDeleteService(row.id);
       ElMessage({
         type: "success",
         message: "删除成功",
       });
-      announcementList();
+      adviceList();
     })
     .catch(() => {
       ElMessage({
@@ -138,22 +135,22 @@ const deleteAnnouncement = (row) => {
   <el-card class="page-container">
     <template #header>
       <div class="header">
-        <div><span>公告管理</span></div>
+        <div><span>健康建议</span></div>
         <div>
           <el-button
             type="primary"
             round
             @click="
               visibleDrawer = true;
-              titles = '添加公告';
+              titles = '添加建议';
               clearDate();
             "
-            >添加公告</el-button
+            >添加建议</el-button
           >
         </div>
       </div>
       <el-form :inline="true">
-        <el-form-item label="公告分类:">
+        <el-form-item label="被建议人:">
           <el-select placeholder="请选择" clearable v-model="announcementCategoryId">
             <el-option
               v-for="c in categories"
@@ -170,22 +167,22 @@ const deleteAnnouncement = (row) => {
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="announcementList">搜索</el-button>
+          <el-button type="primary" @click="adviceList">搜索</el-button>
           <el-button
             @click="
               announcementCategoryId = '';
               state = '';
-              announcementList();
+              adviceList();
             "
             >重置</el-button
           >
         </el-form-item>
       </el-form>
     </template>
-    <el-table :data="announcements" style="width: 100%">
+    <el-table :data="advices" style="width: 100%">
       <el-table-column type="index" label="序号" width="140" />
-      <el-table-column label="公告标题" prop="title"></el-table-column>
-      <el-table-column label="公告类型" prop="categoryName"></el-table-column>
+      <el-table-column label="建议标题" prop="title"></el-table-column>
+      <el-table-column label="被建议人" prop="usrId"></el-table-column>
       <el-table-column label="发表时间" prop="createTime"> </el-table-column>
       <el-table-column label="状态" prop="state"></el-table-column>
       <el-table-column label="操作" width="100">
@@ -202,7 +199,7 @@ const deleteAnnouncement = (row) => {
             circle
             plain
             type="danger"
-            @click="deleteAnnouncement(row)"
+            @click="deleteAdvice(row)"
           ></el-button>
         </template>
       </el-table-column>
@@ -225,13 +222,12 @@ const deleteAnnouncement = (row) => {
     />
 
     <el-drawer v-model="visibleDrawer" :title="titles" direction="rtl" size="40%">
-      <el-form class="drawer-form" :model="announcementModel" label-width="120px">
+      <el-form class="drawer-form" :model="adviceModel" label-width="120px">
         <el-form-item label="公告标题">
-          <el-input v-model="announcementModel.title" placeholder="请输入标题">
-          </el-input>
+          <el-input v-model="adviceModel.title" placeholder="请输入标题"> </el-input>
         </el-form-item>
-        <el-form-item label="公告分类" class="form-item-type">
-          <el-select placeholder="请选择" v-model="announcementModel.announcementCategoryId">
+        <el-form-item label="被建议人" class="form-item-type">
+          <el-select placeholder="请选择" v-model="adviceModel.userId">
             <el-option
               v-for="c in categories"
               :key="c.id"
@@ -240,12 +236,12 @@ const deleteAnnouncement = (row) => {
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="公告内容">
+        <el-form-item label="建议内容">
           <div class="editor">
             <quill-editor
               theme="snow"
               contentType="html"
-              v-model:content="announcementModel.content"
+              v-model:content="adviceModel.content"
               style="height: 400px"
             >
             </quill-editor>
@@ -255,18 +251,12 @@ const deleteAnnouncement = (row) => {
         <el-form-item>
           <el-button
             type="primary"
-            @click="
-              titles == '添加公告'
-                ? addAnnouncement('已发布')
-                : updateAnnouncement('已发布')
-            "
+            @click="titles == '添加建议' ? addAdvice('已发布') : updateAdvice('已发布')"
             >发布</el-button
           >
           <el-button
             type="info"
-            @click="
-              titles == '添加公告' ? addAnnouncement('草稿') : updateAnnouncement('草稿')
-            "
+            @click="titles == '添加建议' ? addAdvice('草稿') : updateAdvice('草稿')"
             >草稿</el-button
           >
         </el-form-item>

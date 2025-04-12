@@ -15,12 +15,13 @@ import PhysiologicalChartVue from '@/view/physiologicalData/PhysiologicalChart.v
 import EvaluationManageVue from '@/view/evaluation/EvaluationManage.vue';
 
 import AdminCategoryVue from '@/view/category/AdminCategory.vue';
-import AdminAvatarVue from '@/admin/AdminAvatar.vue';
-import AdminInfoVue from '@/admin/AdminInfo.vue';
-import AdminResetpasswordVue from '@/admin/AdminResetpassword.vue';
+import AdminAvatarVue from '@/view/admin/AdminAvatar.vue';
+import AdminInfoVue from '@/view/admin/AdminInfo.vue';
+import AdminResetpasswordVue from '@/view/admin/AdminResetpassword.vue';
 import AdminMedicinesVue from '@/view/medicines/AdminMedicines.vue';
 import AnnouncementCategoryVue from '@/view/announcement/AnnouncementCategory.vue';
 import AnnouncementManageVue from '@/view/announcement/AnnouncementManage.vue';
+import AdviceAdminVue from '@/view/Advice/AdviceAdmin.vue';
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -74,6 +75,9 @@ const routes = [
             },
             {
                 path:'/admin/announcementManage',component:AnnouncementManageVue
+            },
+            {
+                path:'/admin/advice',component:AdviceAdminVue
             }
         ]
         
