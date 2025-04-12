@@ -73,18 +73,18 @@ const handleCommand = (command) => {
           </el-icon>
           <span>药物分类</span>
         </el-menu-item>
-         <!--<el-menu-item>
+         <el-menu-item index="/admin/announcementCategory">
           <el-icon>
             <EditPen />
           </el-icon>
-          <span>健康档案</span>
+          <span>公告分类</span>
         </el-menu-item>
-        <el-menu-item>
+        <el-menu-item index="/admin/announcementManage">
           <el-icon>
             <Promotion />
           </el-icon>
-          <span>文章管理</span>
-        </el-menu-item> -->
+          <span>公告管理</span>
+        </el-menu-item>
         <el-sub-menu>
           <template #title>
             <el-icon>
