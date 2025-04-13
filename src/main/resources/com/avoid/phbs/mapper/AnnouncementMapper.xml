@@ -17,7 +17,7 @@
             and create_admin=#{adminId}
         </where>
     </select>
-    <select id="findEvalution" resultType="com.avoid.phbs.model.Announcement">
+    <select id="findEvalution" resultType="com.avoid.phbs.model.Evaluation">
         select * from evaluation
         <where>
             <if test="state!=null">
