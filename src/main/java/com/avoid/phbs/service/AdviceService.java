@@ -18,7 +18,7 @@ public interface AdviceService {
 
     List<User> findUserInfo();
 
-    List<PhysiologicalData> findUserPhysiologicalData();
+    PageBean<PhysiologicalData> findUserPhysiologicalData(Integer pageNum, Integer pageSize, Integer createUser, String state);
 
 
     //找user

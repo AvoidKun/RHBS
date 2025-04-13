@@ -52,8 +52,13 @@ public class AdviceController {
         return Result.success(user);
     }
     @GetMapping("/physiological")
-    public Result<List<PhysiologicalData>> physiologicalData() {
-        List<PhysiologicalData> physiological = adviceService.findUserPhysiologicalData();
+    public Result<PageBean<PhysiologicalData>> physiologicalData(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) Integer createUser,
+            @RequestParam(required = false) String state
+    ) {
+        PageBean<PhysiologicalData> physiological = adviceService.findUserPhysiologicalData(pageNum,pageSize,createUser,state);
         return Result.success(physiological);
     }
 }

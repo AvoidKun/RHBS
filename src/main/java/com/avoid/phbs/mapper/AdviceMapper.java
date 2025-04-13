@@ -25,6 +25,6 @@ public interface AdviceMapper {
     @Select("select * from user")
     List<User> findUserInfo();
 
-    @Select("select * from physiologicaldata")
-    List<PhysiologicalData> findUserPhysiologicalData();
+
+    List<PhysiologicalData> findUserPhysiologicalData(Integer createUser, String state);
 }

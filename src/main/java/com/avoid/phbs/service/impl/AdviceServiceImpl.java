@@ -58,9 +58,17 @@ public class AdviceServiceImpl implements AdviceService {
     }
 
     @Override
-    public List<PhysiologicalData> findUserPhysiologicalData() {
-        return adviceMapper.findUserPhysiologicalData();
+    public PageBean<PhysiologicalData> findUserPhysiologicalData(Integer pageNum, Integer pageSize, Integer createUser, String state) {
+        PageBean<PhysiologicalData> pp = new PageBean<>();
+        PageHelper.startPage(pageNum,pageSize);
+        List<PhysiologicalData> al = adviceMapper.findUserPhysiologicalData(createUser,state);
+        Page<PhysiologicalData> page = (Page<PhysiologicalData>) al;
+        pp.setItems(page.getResult());
+        pp.setTotal(page.getTotal());
+        return pp;
     }
+
+
 }
 
 

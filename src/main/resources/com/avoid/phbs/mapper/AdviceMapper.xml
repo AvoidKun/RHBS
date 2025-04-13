@@ -17,4 +17,15 @@
             and admin_id=#{adminId}
         </where>
     </select>
+    <select id="findUserPhysiologicalData" resultType="com.avoid.phbs.model.PhysiologicalData">
+        select * from physiologicaldata
+        <where>
+            <if test="createUser!=null">
+                create_user=#{createUser}
+            </if>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>
