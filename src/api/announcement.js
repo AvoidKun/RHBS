@@ -31,3 +31,8 @@ export const announcementUpdateService = (announcementData)=>{
 export const announcementDeleteService = (id)=>{
     return request.delete('/announcement?id='+id)
 }
+
+//获取村民评价
+export const announcementEvaluationService=(params)=>{
+    return request.get("/announcement/evaluation",{params:params})
+}

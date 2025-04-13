@@ -6,10 +6,9 @@ import {
   adviceAddService,
   adviceUpdateService,
   adviceDeleteService,
+  adviceUserInfoService,
 } from "@/api/advice.js";
-import {
-    userInfoService
-} from '@/api/user.js'
+
 //用户列表数据
 const users = ref([]);
 //建议数据
@@ -32,11 +31,13 @@ const onCurrentChange = (num) => {
 const userId = ref("");
 //管理员搜索选中的发布状态
 const state = ref("");
-const userInfo = async()=>{
-    let result = await userInfoService();
-    users.value = result.data;
-    console.log(userId.value)
-}
+const userInfo = async () => {
+  let result = await adviceUserInfoService();
+  users.value = result.data;
+  // console.log(users.value)
+};
+
+const userNames = ref("");
 const adviceList = async () => {
   let params = {
     pageNum: pageNum.value,
@@ -48,14 +49,12 @@ const adviceList = async () => {
   //   console.log(result.data)
   total.value = result.data.total;
   advices.value = result.data.items;
-  
-  for(let i =0;i<advices.value.length;i++){
+  for (let i = 0; i < advices.value.length; i++) {
     let advice = advices.value[i];
-    for(let j =0 ;j<users.value.length;j++){
-        if(advice.userId==users.value[j].id){
-            advice.userName = users.value[j].userName;
-            console.log(advice)
-        }
+    for (let j = 0; j < users.value.length; j++) {
+      if (advice.userId == users.value[j].id) {
+        advice.userName = users.value[j].username;
+      }
     }
   }
 };
@@ -109,7 +108,7 @@ const clearDate = () => {
   adviceModel.value.state = "";
 };
 //删
-const deleteAdvice= (row) => {
+const deleteAdvice = (row) => {
   ElMessageBox.confirm("你确认要删除该建议吗？", "温馨提示", {
     confirmButtonText: "确认",
     cancelButtonText: "取消",
@@ -129,6 +128,18 @@ const deleteAdvice= (row) => {
         message: "取消删除",
       });
     });
+};
+const adviceLists = () => {
+  if (userNames.value != "") {
+    for (let h = 0; h < users.value.length; h++) {
+      if (userNames.value == users.value[h].username) {
+        userId.value = users.value[h].id;
+        adviceList();
+      }
+    }
+  } else {
+    adviceList();
+  }
 };
 </script>
 <template>
@@ -151,14 +162,7 @@ const deleteAdvice= (row) => {
       </div>
       <el-form :inline="true">
         <el-form-item label="被建议人:">
-          <el-select placeholder="请选择" clearable v-model="announcementCategoryId">
-            <el-option
-              v-for="c in categories"
-              :key="c.id"
-              :label="c.categoryName"
-              :value="c.id"
-            />
-          </el-select>
+          <el-input placeholder="请输入" clearable v-model="userNames"> </el-input>
         </el-form-item>
         <el-form-item label="发布状态:">
           <el-select placeholder="请选择" clearable v-model="state">
@@ -167,10 +171,11 @@ const deleteAdvice= (row) => {
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="adviceList">搜索</el-button>
+          <el-button type="primary" @click="adviceLists">搜索</el-button>
           <el-button
             @click="
-              announcementCategoryId = '';
+              userId = '';
+              userNames='';
               state = '';
               adviceList();
             "
@@ -182,7 +187,7 @@ const deleteAdvice= (row) => {
     <el-table :data="advices" style="width: 100%">
       <el-table-column type="index" label="序号" width="140" />
       <el-table-column label="建议标题" prop="title"></el-table-column>
-      <el-table-column label="被建议人" prop="usrId"></el-table-column>
+      <el-table-column label="被建议人" prop="userName"></el-table-column>
       <el-table-column label="发表时间" prop="createTime"> </el-table-column>
       <el-table-column label="状态" prop="state"></el-table-column>
       <el-table-column label="操作" width="100">
@@ -229,9 +234,9 @@ const deleteAdvice= (row) => {
         <el-form-item label="被建议人" class="form-item-type">
           <el-select placeholder="请选择" v-model="adviceModel.userId">
             <el-option
-              v-for="c in categories"
+              v-for="c in users"
               :key="c.id"
-              :label="c.categoryName"
+              :label="c.username"
               :value="c.id"
             ></el-option>
           </el-select>

@@ -15,3 +15,12 @@ export const adviceUpdateService=(advice)=>{
 export const adviceDeleteService=(id)=>{
     return request.delete("/advice?id="+id)
 }
+//获取用户信息
+export const adviceUserInfoService=()=>{
+    return request.get("/advice/userinfo")
+}
+
+//获取健康数据
+export const advicePhysiologicalService=(params)=>{
+    return request.get("/advice/physiological",{params:params})
+}

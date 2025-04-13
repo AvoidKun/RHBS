@@ -134,6 +134,7 @@ const handleCommand=(command)=>{
 
             <el-header>
                 <div>居民:<strong>{{ userInfoStore.info.username }}</strong></div>
+                <div style="font-size: 40px;color:#81AEC3;">乡村居民健康信息管理系统管理系统</div>
                 <!--command需要和路由名字绑定-->
                 <el-dropdown placement="bottom-end" @command="handleCommand">
                     <span class="el-dropdown-box">

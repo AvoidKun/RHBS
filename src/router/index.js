@@ -22,6 +22,8 @@ import AdminMedicinesVue from '@/view/medicines/AdminMedicines.vue';
 import AnnouncementCategoryVue from '@/view/announcement/AnnouncementCategory.vue';
 import AnnouncementManageVue from '@/view/announcement/AnnouncementManage.vue';
 import AdviceAdminVue from '@/view/Advice/AdviceAdmin.vue';
+import PhysiologicalAdminVue from '@/view/physiologicalData/PhysiologicalAdmin.vue';
+import EvaluationAdminVue from '@/view/evaluation/EvaluationAdmin.vue';
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
@@ -78,6 +80,12 @@ const routes = [
             },
             {
                 path:'/admin/advice',component:AdviceAdminVue
+            },
+            {
+                path:'/admin/physiological',component:PhysiologicalAdminVue
+            },
+            {
+                path:'/admin/evaluation',component:EvaluationAdminVue
             }
         ]
         

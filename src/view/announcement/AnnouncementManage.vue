@@ -36,6 +36,7 @@ const state = ref("");
 const announcementCategoryList = async () => {
   let result = await announcementCategoryListService();
   categories.value = result.data;
+    //  console.log(categories.value)
 };
 const announcementList = async () => {
   let params = {
@@ -56,7 +57,6 @@ const announcementList = async () => {
     for (let j = 0; j < categories.value.length; j++) {
       if (announcement.announcementCategoryId == categories.value[j].id) {
         announcement.categoryName = categories.value[j].categoryName;
-        // console.log(announcement);
       }
     }
   }

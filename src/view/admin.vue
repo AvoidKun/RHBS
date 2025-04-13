@@ -85,9 +85,21 @@ const handleCommand = (command) => {
           </el-icon>
           <span>公告管理</span>
         </el-menu-item>
+        <el-menu-item index="/admin/evaluation">
+          <el-icon>
+            <Promotion />
+          </el-icon>
+          <span>村民评价</span>
+        </el-menu-item>
         <el-menu-item index="/admin/advice">
           <el-icon><Message /></el-icon>
           <span>建议推送</span>
+        </el-menu-item>
+        <el-menu-item index="/admin/physiological">
+          <el-icon>
+            <EditPen />
+          </el-icon>
+          <span>居民健康数据</span>
         </el-menu-item>
         <el-sub-menu>
           <template #title>
@@ -124,6 +136,7 @@ const handleCommand = (command) => {
         <div>
           居民:<strong>{{ adminInfoStore.info.adminname }}</strong>
         </div>
+        <div style="font-size: 40px;color:#81AEC3;">乡村居民健康信息管理系统管理系统</div>
         <!--command需要和路由名字绑定-->
         <el-dropdown placement="bottom-end" @command="handleCommand">
           <span class="el-dropdown-box">
