@@ -52,11 +52,12 @@ public class AdviceServiceImpl implements AdviceService {
         adviceMapper.deleteById(id);
     }
 
+    //用户
     @Override
     public List<User> findUserInfo() {
         return adviceMapper.findUserInfo();
     }
-
+    //健康数据
     @Override
     public PageBean<PhysiologicalData> findUserPhysiologicalData(Integer pageNum, Integer pageSize, Integer createUser, String state) {
         PageBean<PhysiologicalData> pp = new PageBean<>();
@@ -67,7 +68,6 @@ public class AdviceServiceImpl implements AdviceService {
         pp.setTotal(page.getTotal());
         return pp;
     }
-
 
 }
 

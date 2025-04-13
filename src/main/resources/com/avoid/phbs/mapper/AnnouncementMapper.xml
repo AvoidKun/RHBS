@@ -17,4 +17,12 @@
             and create_admin=#{adminId}
         </where>
     </select>
+    <select id="findEvalution" resultType="com.avoid.phbs.model.Announcement">
+        select * from evaluation
+        <where>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>

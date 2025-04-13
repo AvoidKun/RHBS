@@ -1,6 +1,7 @@
 package com.avoid.phbs.service;
 
 import com.avoid.phbs.model.Announcement;
+import com.avoid.phbs.model.Evaluation;
 import com.avoid.phbs.model.PageBean;
 
 public interface AnnouncementService {
@@ -11,4 +12,6 @@ public interface AnnouncementService {
     void update(Announcement announcement);
 
     void deleteById(Integer id);
+
+    PageBean<Evaluation> findEvalution(Integer pageNum, Integer pageSize, String state);
 }

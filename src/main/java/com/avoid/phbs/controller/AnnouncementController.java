@@ -2,6 +2,7 @@ package com.avoid.phbs.controller;
 
 
 import com.avoid.phbs.model.Announcement;
+import com.avoid.phbs.model.Evaluation;
 import com.avoid.phbs.model.PageBean;
 import com.avoid.phbs.model.Result;
 import com.avoid.phbs.service.AnnouncementService;
@@ -39,6 +40,15 @@ public class AnnouncementController {
     public Result delete(Integer id){
         announcementService.deleteById(id);
         return Result.success();
+    }
+    @GetMapping("/evaluation")
+    public Result<PageBean<Evaluation>> evaluetion(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) String state
+    ){
+        PageBean<Evaluation> evaluation = announcementService.findEvalution(pageNum,pageSize,state);
+        return Result.success(evaluation);
     }
 }
 

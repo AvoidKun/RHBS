@@ -1,9 +1,6 @@
 package com.avoid.phbs.service;
 
-import com.avoid.phbs.model.Advice;
-import com.avoid.phbs.model.PageBean;
-import com.avoid.phbs.model.PhysiologicalData;
-import com.avoid.phbs.model.User;
+import com.avoid.phbs.model.*;
 
 import java.util.List;
 
@@ -19,7 +16,6 @@ public interface AdviceService {
     List<User> findUserInfo();
 
     PageBean<PhysiologicalData> findUserPhysiologicalData(Integer pageNum, Integer pageSize, Integer createUser, String state);
-
 
     //找user
    

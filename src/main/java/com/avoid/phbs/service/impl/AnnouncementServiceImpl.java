@@ -4,6 +4,7 @@ import com.avoid.phbs.mapper.AnnouncementMapper;
 import com.avoid.phbs.mapper.ArticleMapper;
 import com.avoid.phbs.model.Announcement;
 import com.avoid.phbs.model.Article;
+import com.avoid.phbs.model.Evaluation;
 import com.avoid.phbs.model.PageBean;
 import com.avoid.phbs.service.AnnouncementService;
 import com.avoid.phbs.utils.ThreadLocalUtil;
@@ -58,11 +59,16 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     public void deleteById(Integer id) {
         announcementMapper.deleteById(id);
     }
+
+    @Override
+    public PageBean<Evaluation> findEvalution(Integer pageNum, Integer pageSize, String state) {
+        PageBean<Evaluation> ep = new PageBean<>();
+        PageHelper.startPage(pageNum,pageSize);
+        List<Evaluation> al = announcementMapper.findEvalution(state);
+        Page<Evaluation> page = (Page<Evaluation>) al;
+        ep.setItems(page.getResult());
+        ep.setTotal(page.getTotal());
+        return ep;
+    }
 }
 
-
-//    @Override
-//    public void deleteById(Integer id) {
-//        articleMapper.deleteById(id);
-//    }
-//}

@@ -1,6 +1,7 @@
 package com.avoid.phbs.mapper;
 
 import com.avoid.phbs.model.Announcement;
+import com.avoid.phbs.model.Evaluation;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,6 @@ public interface AnnouncementMapper {
     //删
     @Delete("delete from announcement where id = #{id}")
     void deleteById(Integer id);
+
+    List<Evaluation> findEvalution(String state);
 }
