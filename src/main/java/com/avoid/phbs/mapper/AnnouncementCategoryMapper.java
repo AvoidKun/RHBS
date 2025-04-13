@@ -17,7 +17,7 @@ public interface AnnouncementCategoryMapper {
     List<AnnouncementCategory> list(Integer adminId);
 
     //改
-    @Update("update aannouncementcategory set category_name=#{categoryName},category_alias=#{categoryAlias},update_time=#{updateTime} where id = #{id}")
+    @Update("update announcementcategory set category_name=#{categoryName},category_alias=#{categoryAlias},update_time=#{updateTime} where id = #{id}")
     void update(AnnouncementCategory announcementCategory);
 
     //删

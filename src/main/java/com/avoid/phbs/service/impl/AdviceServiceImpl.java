@@ -1,8 +1,7 @@
 package com.avoid.phbs.service.impl;
 
 import com.avoid.phbs.mapper.AdviceMapper;
-import com.avoid.phbs.model.Advice;
-import com.avoid.phbs.model.PageBean;
+import com.avoid.phbs.model.*;
 import com.avoid.phbs.service.AdviceService;
 import com.avoid.phbs.utils.ThreadLocalUtil;
 import com.github.pagehelper.Page;
@@ -52,12 +51,17 @@ public class AdviceServiceImpl implements AdviceService {
     public void deleteById(Integer id) {
         adviceMapper.deleteById(id);
     }
+
+    @Override
+    public List<User> findUserInfo() {
+        return adviceMapper.findUserInfo();
+    }
+
+    @Override
+    public List<PhysiologicalData> findUserPhysiologicalData() {
+        return adviceMapper.findUserPhysiologicalData();
+    }
 }
 
 
 
-//    @Override
-//    public void deleteById(Integer id) {
-//        evaluationMapper.deleteById(id);
-//    }
-//}

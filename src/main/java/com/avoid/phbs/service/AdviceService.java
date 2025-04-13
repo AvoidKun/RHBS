@@ -2,6 +2,10 @@ package com.avoid.phbs.service;
 
 import com.avoid.phbs.model.Advice;
 import com.avoid.phbs.model.PageBean;
+import com.avoid.phbs.model.PhysiologicalData;
+import com.avoid.phbs.model.User;
+
+import java.util.List;
 
 public interface AdviceService {
     void add(Advice advice);
@@ -11,4 +15,12 @@ public interface AdviceService {
     void update(Advice advice);
 
     void deleteById(Integer id);
+
+    List<User> findUserInfo();
+
+    List<PhysiologicalData> findUserPhysiologicalData();
+
+
+    //找user
+   
 }

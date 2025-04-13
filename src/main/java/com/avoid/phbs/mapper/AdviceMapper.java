@@ -1,10 +1,9 @@
 package com.avoid.phbs.mapper;
 
 import com.avoid.phbs.model.Advice;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import com.avoid.phbs.model.PhysiologicalData;
+import com.avoid.phbs.model.User;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,4 +20,11 @@ public interface AdviceMapper {
 
     @Delete("delete from advice where id = #{id}")
     void deleteById(Integer id);
+
+
+    @Select("select * from user")
+    List<User> findUserInfo();
+
+    @Select("select * from physiologicaldata")
+    List<PhysiologicalData> findUserPhysiologicalData();
 }
