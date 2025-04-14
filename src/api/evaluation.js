@@ -15,3 +15,15 @@ export const evaluationUpdateService=(evaluation)=>{
 export const evaluationDeleteService=(id)=>{
     return request.delete("/evaluation?id="+id)
 }
+//获取药物信息
+export const evaluationMedicinesService=(params)=>{
+    return request.get("/evaluation/medicines",{params:params})
+}
+//获取公告类型
+export const evaluationCategoryListService =() =>{
+    return request.get('/evaluation/category')
+}
+//获取公告数据
+export const evaluationAnnouncementService=(params)=>{
+    return request.get('/evaluation/announcement',{params:params})
+}

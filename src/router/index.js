@@ -13,6 +13,9 @@ import UserResetPasswordVue from '@/view/user/UserResetPassword.vue';
 import PhysiologicalDataManageVue from '@/view/physiologicalData/PhysiologicalDataManage.vue'
 import PhysiologicalChartVue from '@/view/physiologicalData/PhysiologicalChart.vue'
 import EvaluationManageVue from '@/view/evaluation/EvaluationManage.vue';
+import UserMedicinesVue from '@/view/medicines/UserMedicines.vue';
+import UserAnnouncementVue from '@/view/medicines/UserAnnouncement.vue';
+
 
 import AdminCategoryVue from '@/view/category/AdminCategory.vue';
 import AdminAvatarVue from '@/view/admin/AdminAvatar.vue';
@@ -54,6 +57,12 @@ const routes = [
             },
             {
                 path:'/evaluation/manage',component:EvaluationManageVue
+            },
+            {
+                path:'/user/medicines',component:UserMedicinesVue
+            },
+            {
+                path:'/user/announcement',component:UserAnnouncementVue
             }
         ]
     },

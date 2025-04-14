@@ -1,11 +1,11 @@
 <script setup>
 import {
   articleCategoryListService,
-  articleCategoryAddService,
-  articleCategoryUpdateService,
-  articleCategoryDeleteService,
+  // articleCategoryAddService,
+  // articleCategoryUpdateService,
+  // articleCategoryDeleteService,
 } from "@/api/article.js";
-import { Edit, Delete } from "@element-plus/icons-vue";
+import {Document } from "@element-plus/icons-vue";
 import { ref } from "vue";
 const categories = ref([]);
 const articleCategoryList = async () => {
@@ -47,43 +47,43 @@ const showDialog = (row) => {
   categoryModel.value.id = row.id;
 };
 
-//编辑分类
-const updateCategory = async () => {
-  //调用接口
-  let result = await articleCategoryUpdateService(categoryModel.value);
-  ElMessage.success(result.msg ? result.msg : "更改成功");
-  articleCategoryList();
-  dialogFormVisible.value = false;
-};
-//清空数据
-const clearData = () => {
-  categoryModel.value.categoryName = "";
-  categoryModel.value.categoryAlias = "";
-};
-//删除
-const deleteCategory = (row) => {
-  ElMessageBox.confirm("你确认要删除该分类信息吗？", "温馨提示", {
-    confirmButtonText: "确认",
-    cancelButtonText: "取消",
-    type: "warning",
-  })
-    .then(async () => {
-      //调用接口
-      let result = await articleCategoryDeleteService(row.id);
-      ElMessage({
-        type: "success",
-        message: "删除成功",
-      });
-      //重置
-      articleCategoryList();
-    })
-    .catch(() => {
-      ElMessage({
-        type: "info",
-        message: "取消了删除",
-      });
-    });
-};
+// //编辑分类
+// const updateCategory = async () => {
+//   //调用接口
+//   let result = await articleCategoryUpdateService(categoryModel.value);
+//   ElMessage.success(result.msg ? result.msg : "更改成功");
+//   articleCategoryList();
+//   dialogFormVisible.value = false;
+// };
+// //清空数据
+// const clearData = () => {
+//   categoryModel.value.categoryName = "";
+//   categoryModel.value.categoryAlias = "";
+// };
+// //删除
+// const deleteCategory = (row) => {
+//   ElMessageBox.confirm("你确认要删除该分类信息吗？", "温馨提示", {
+//     confirmButtonText: "确认",
+//     cancelButtonText: "取消",
+//     type: "warning",
+//   })
+//     .then(async () => {
+//       //调用接口
+//       let result = await articleCategoryDeleteService(row.id);
+//       ElMessage({
+//         type: "success",
+//         message: "删除成功",
+//       });
+//       //重置
+//       articleCategoryList();
+//     })
+//     .catch(() => {
+//       ElMessage({
+//         type: "info",
+//         message: "取消了删除",
+//       });
+//     });
+// };
 </script>
 <template>
   <el-card class="page-container">
@@ -91,7 +91,7 @@ const deleteCategory = (row) => {
       <div class="header">
         <div>文章分类</div>
         <div>
-          <el-button
+          <!-- <el-button
             type="primary"
             round
             @click="
@@ -100,7 +100,7 @@ const deleteCategory = (row) => {
               clearData();
             "
             >添加分类</el-button
-          >
+          > -->
         </div>
       </div>
     </template>
@@ -112,18 +112,11 @@ const deleteCategory = (row) => {
       <el-table-column label="操作" width="100">
         <template #default="{ row }">
           <el-button
-            :icon="Edit"
+            :icon="Document"
             circle
             plain
             type="primary"
-            @click="showDialog(row)"
-          ></el-button>
-          <el-button
-            :icon="Delete"
-            circle
-            plain
-            type="danger"
-            @click="deleteCategory(row)"
+            @click="showDrawer(row)"
           ></el-button>
         </template>
       </el-table-column>
@@ -133,7 +126,7 @@ const deleteCategory = (row) => {
     </el-table>
   </el-card>
 
-  <el-dialog v-model="dialogFormVisible" width="30%" :title="title">
+  <!-- <el-dialog v-model="dialogFormVisible" width="30%" :title="title">
     <el-form
       :model="categoryModel"
       :rules="rules"
@@ -154,13 +147,13 @@ const deleteCategory = (row) => {
           autocomplete="off"
           minlenth="1"
           maxlength="10"
-        />
-      </el-form-item>
+        /> -->
+      <!-- </el-form-item> -->
       <!-- <el-select v-model="form.region" placeholder="Please select a zone">
                 <el-option label="Zone No.1" value="shanghai" />
                 <el-option label="Zone No.2" value="beijing" />
             </el-select> -->
-    </el-form>
+    <!-- </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -171,7 +164,7 @@ const deleteCategory = (row) => {
         >
       </span>
     </template>
-  </el-dialog>
+  </el-dialog> -->
 </template>
 <style  scoped>
 .page-container {

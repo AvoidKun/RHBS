@@ -238,7 +238,7 @@ const deleteData = (row) => {
 
     <el-table :data="physiological">
       <el-table-column type="index" label="序号" width="140" />
-      <el-table-column label="状态" prop="state" width="300"> </el-table-column>
+      <el-table-column label="状态" prop="state"> </el-table-column>
       <el-table-column label="发布时间" prop="createTime"></el-table-column>
       <el-table-column label="操作" width="120">
         <template #default="{ row }">
