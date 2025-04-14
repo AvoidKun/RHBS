@@ -19,8 +19,21 @@ export const adviceDeleteService=(id)=>{
 export const adviceUserInfoService=()=>{
     return request.get("/advice/userinfo")
 }
+//注册用户
+//注册接口
+export const adviceUserRegisterService = (registerData) => {
+    const params = new URLSearchParams()
+    for (let key in registerData) {
+        params.append(key, registerData[key])
+    }
+    return request.post('/user/register', params)
+
+}
 
 //获取健康数据
 export const advicePhysiologicalService=(params)=>{
     return request.get("/advice/physiological",{params:params})
+}
+export const advicePhysiologicalChartService=()=>{
+    return request.get("/advice/chart")
 }

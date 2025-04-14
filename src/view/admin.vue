@@ -9,12 +9,17 @@ import {
   SwitchButton,
   CaretBottom,
   Message,
+  Ship,
+  Goods,
+  Suitcase,
+  Guide,
+  Bicycle,
 } from "@element-plus/icons-vue";
 
-import avatar from "@/assets/3.jpg";
+import avatar from "@/assets/4.jpg";
 import { adminInfoService } from "@/api/admin.js";
-import adminAdminInfoStore from '@/stores/adminInfo.js'
-import { useTokenStore } from '@/stores/token.js'
+import adminAdminInfoStore from "@/stores/adminInfo.js";
+import { useTokenStore } from "@/stores/token.js";
 const tokenStore = useTokenStore();
 const adminInfoStore = adminAdminInfoStore();
 const getAdminInfo = async () => {
@@ -60,7 +65,18 @@ const handleCommand = (command) => {
     <el-aside width="20%">
       <div class="aside-logo"></div>
       <!-- <h3>村民</h3> -->
-      <el-menu active-text-color="#ffd04b" background-color="#68848E" text-color="#fff" router>
+      <el-menu
+        active-text-color="#ffd04b"
+        background-color="#68848E"
+        text-color="#fff"
+        router
+      >
+        <el-menu-item index="/admin/register">
+          <el-icon>
+            <Ship />
+          </el-icon>
+          <span>村民管理</span>
+        </el-menu-item>
         <el-menu-item index="/admin/category">
           <el-icon>
             <Management />
@@ -68,21 +84,17 @@ const handleCommand = (command) => {
           <span>文章分类</span>
         </el-menu-item>
         <el-menu-item index="/admin/medicines">
-          <el-icon>
-            <EditPen />
-          </el-icon>
+          <el-icon><Goods /></el-icon>
           <span>药物分类</span>
         </el-menu-item>
-         <el-menu-item index="/admin/announcementCategory">
+        <el-menu-item index="/admin/announcementCategory">
           <el-icon>
             <EditPen />
           </el-icon>
           <span>公告分类</span>
         </el-menu-item>
         <el-menu-item index="/admin/announcementManage">
-          <el-icon>
-            <Promotion />
-          </el-icon>
+          <el-icon><Suitcase /></el-icon>
           <span>公告管理</span>
         </el-menu-item>
         <el-menu-item index="/admin/evaluation">
@@ -96,10 +108,12 @@ const handleCommand = (command) => {
           <span>建议推送</span>
         </el-menu-item>
         <el-menu-item index="/admin/physiological">
-          <el-icon>
-            <EditPen />
-          </el-icon>
+          <el-icon><Guide /></el-icon>
           <span>居民健康数据</span>
+        </el-menu-item>
+        <el-menu-item index="/admin/physiologicalState">
+          <el-icon><Bicycle /></el-icon>
+          <span>居民健康状态</span>
         </el-menu-item>
         <el-sub-menu>
           <template #title>
@@ -116,7 +130,7 @@ const handleCommand = (command) => {
             <span>基本资料</span>
           </el-menu-item>
           <!-- </el-menu-item-group> -->
-          <el-menu-item index="/admin/avatar"> 
+          <el-menu-item index="/admin/avatar">
             <el-icon>
               <Crop />
             </el-icon>
@@ -134,9 +148,11 @@ const handleCommand = (command) => {
     <el-container>
       <el-header>
         <div>
-          居民:<strong>{{ adminInfoStore.info.adminname }}</strong>
+          管理员:<strong>{{ adminInfoStore.info.adminname }}</strong>
         </div>
-        <div style="font-size: 40px;color:#81AEC3;">乡村居民健康信息管理系统管理系统</div>
+        <div style="font-size: 40px; color: #81aec3">
+          乡村居民健康信息管理系统
+        </div>
         <!--command需要和路由名字绑定-->
         <el-dropdown placement="bottom-end" @command="handleCommand">
           <span class="el-dropdown-box">
@@ -185,7 +201,7 @@ const handleCommand = (command) => {
 
 .aside-logo {
   height: 30%;
-  background: url("@/assets/2.jpg") no-repeat;
+  background: url("@/assets/5.jpg") no-repeat;
   background-position: 50% 50%;
   background-size: cover;
 }

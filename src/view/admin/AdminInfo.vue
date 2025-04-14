@@ -59,8 +59,11 @@ const updateAdminInfo = async () => {
           <el-form-item label="手机电话" prop="phone">
             <el-input v-model="adminInfo.phone"></el-input>
           </el-form-item>
-          <el-form-item label="用户邮箱" prop="email">
+          <el-form-item label="管理员邮箱" prop="email">
             <el-input v-model="adminInfo.email"></el-input>
+          </el-form-item>
+          <el-form-item label="管理员职务" prop="position">
+            <el-input v-model="adminInfo.position"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="updateAdminInfo()">提交修改</el-button>

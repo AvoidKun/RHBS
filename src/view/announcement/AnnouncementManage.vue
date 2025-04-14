@@ -152,6 +152,7 @@ const deleteAnnouncement = (row) => {
           >
         </div>
       </div>
+    </template>
       <el-form :inline="true">
         <el-form-item label="公告分类:">
           <el-select placeholder="请选择" clearable v-model="announcementCategoryId">
@@ -181,7 +182,6 @@ const deleteAnnouncement = (row) => {
           >
         </el-form-item>
       </el-form>
-    </template>
     <el-table :data="announcements" style="width: 100%">
       <el-table-column type="index" label="序号" width="140" />
       <el-table-column label="公告标题" prop="title"></el-table-column>
