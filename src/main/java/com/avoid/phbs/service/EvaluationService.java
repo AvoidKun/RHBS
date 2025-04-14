@@ -1,8 +1,8 @@
 package com.avoid.phbs.service;
 
-import com.avoid.phbs.model.Evaluation;
-import com.avoid.phbs.model.Medicines;
-import com.avoid.phbs.model.PageBean;
+import com.avoid.phbs.model.*;
+
+import java.util.List;
 
 public interface EvaluationService {
     //增
@@ -19,4 +19,10 @@ public interface EvaluationService {
 
     //药物数据
     PageBean<Medicines> medicinesList(Integer pageNum, Integer pageSize, String state);
+
+    //公告类型
+    List<AnnouncementCategory> categorylist();
+
+    //公告详情
+    PageBean<Announcement> announcementlist(Integer pageNum, Integer pageSize, Integer announcementCategoryId, String state);
 }

@@ -1,9 +1,7 @@
 package com.avoid.phbs.service.impl;
 
 import com.avoid.phbs.mapper.EvaluationMapper;
-import com.avoid.phbs.model.Evaluation;
-import com.avoid.phbs.model.Medicines;
-import com.avoid.phbs.model.PageBean;
+import com.avoid.phbs.model.*;
 import com.avoid.phbs.service.EvaluationService;
 import com.avoid.phbs.utils.ThreadLocalUtil;
 import com.github.pagehelper.Page;
@@ -60,6 +58,27 @@ public class EvaluationServiceImpl implements EvaluationService {
         PageHelper.startPage(pageNum,pageSize);
         List<Medicines> as = evaluationMapper.medicinesList(state);
         Page<Medicines> page = (Page<Medicines>) as;
+        pb.setTotal(page.getTotal());
+        pb.setItems(page.getResult());
+        return pb;
+    }
+
+    @Override
+    public List<AnnouncementCategory> categorylist() {
+        return evaluationMapper.categorylist();
+    }
+
+    @Override
+    public PageBean<Announcement> announcementlist(Integer pageNum, Integer pageSize, Integer announcementCategoryId, String state) {
+
+        //创建PageBean对象
+        PageBean<Announcement> pb = new PageBean<>();
+        //开启分页查询
+        PageHelper.startPage(pageNum,pageSize);
+        List<Announcement> as = evaluationMapper.announcementlist(announcementCategoryId,state);
+        Page<Announcement> page = (Page<Announcement>) as ;
+
+        //把数据传到PageBean中
         pb.setTotal(page.getTotal());
         pb.setItems(page.getResult());
         return pb;

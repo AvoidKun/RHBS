@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/evaluation")
 public class EvaluationController {
@@ -48,5 +50,21 @@ public class EvaluationController {
     ){
         PageBean<Medicines> pm = evaluationService.medicinesList(pageNum,pageSize,state);
         return Result.success(pm);
+    }
+
+    @GetMapping("/category")
+    public Result<List<AnnouncementCategory>> categorylist(){
+        List<AnnouncementCategory> categoryLists = evaluationService.categorylist();
+        return Result.success(categoryLists);
+    }
+    @GetMapping("/announcement")
+    public Result<PageBean<Announcement>> announcementlist(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) Integer announcementCategoryId,
+            @RequestParam(required = false) String state
+    ){
+        PageBean<Announcement> pb = evaluationService.announcementlist(pageNum,pageSize,announcementCategoryId,state);
+        return Result.success(pb);
     }
 }

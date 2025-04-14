@@ -1,11 +1,10 @@
 package com.avoid.phbs.mapper;
 
+import com.avoid.phbs.model.Announcement;
+import com.avoid.phbs.model.AnnouncementCategory;
 import com.avoid.phbs.model.Evaluation;
 import com.avoid.phbs.model.Medicines;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -29,4 +28,10 @@ public interface EvaluationMapper {
 
     //药物
     List<Medicines> medicinesList(String state);
+
+    //建议
+    @Select("select * from announcementcategory")
+    List<AnnouncementCategory> categorylist();
+
+    List<Announcement> announcementlist(Integer announcementCategoryId, String state);
 }

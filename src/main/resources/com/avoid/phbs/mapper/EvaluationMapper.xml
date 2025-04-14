@@ -21,4 +21,15 @@
             </if>
         </where>
     </select>
+    <select id="announcementlist" resultType="com.avoid.phbs.model.Announcement">
+        select * from announcement
+        <where>
+            <if test="announcementCategoryId!=null">
+                announcement_category_id=#{announcementCategoryId}
+            </if>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>
