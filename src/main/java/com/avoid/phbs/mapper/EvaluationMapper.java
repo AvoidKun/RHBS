@@ -1,6 +1,7 @@
 package com.avoid.phbs.mapper;
 
 import com.avoid.phbs.model.Evaluation;
+import com.avoid.phbs.model.Medicines;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,7 @@ public interface EvaluationMapper {
     //删
     @Delete("delete from evaluation where id = #{id}")
     void deleteById(Integer id);
+
+    //药物
+    List<Medicines> medicinesList(String state);
 }

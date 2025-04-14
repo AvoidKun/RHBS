@@ -1,9 +1,6 @@
 package com.avoid.phbs.controller;
 
-import com.avoid.phbs.model.Article;
-import com.avoid.phbs.model.Evaluation;
-import com.avoid.phbs.model.PageBean;
-import com.avoid.phbs.model.Result;
+import com.avoid.phbs.model.*;
 import com.avoid.phbs.service.EvaluationService;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +38,15 @@ public class EvaluationController {
     public Result delete(Integer id){
         evaluationService.deleteById(id);
         return Result.success();
+    }
+
+    @GetMapping("/medicines")
+    public Result<PageBean<Medicines>> medicinesList(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) String state
+    ){
+        PageBean<Medicines> pm = evaluationService.medicinesList(pageNum,pageSize,state);
+        return Result.success(pm);
     }
 }

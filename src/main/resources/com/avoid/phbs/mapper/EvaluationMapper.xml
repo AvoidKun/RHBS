@@ -13,4 +13,12 @@
             and create_user=#{userId}
         </where>
     </select>
+    <select id="medicinesList" resultType="com.avoid.phbs.model.Medicines">
+        select * from medicines
+        <where>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>

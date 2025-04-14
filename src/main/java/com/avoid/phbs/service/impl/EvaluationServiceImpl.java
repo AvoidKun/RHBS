@@ -2,6 +2,7 @@ package com.avoid.phbs.service.impl;
 
 import com.avoid.phbs.mapper.EvaluationMapper;
 import com.avoid.phbs.model.Evaluation;
+import com.avoid.phbs.model.Medicines;
 import com.avoid.phbs.model.PageBean;
 import com.avoid.phbs.service.EvaluationService;
 import com.avoid.phbs.utils.ThreadLocalUtil;
@@ -50,5 +51,17 @@ public class EvaluationServiceImpl implements EvaluationService {
     @Override
     public void deleteById(Integer id) {
         evaluationMapper.deleteById(id);
+    }
+
+    //药物数据
+    @Override
+    public PageBean<Medicines> medicinesList(Integer pageNum, Integer pageSize, String state) {
+        PageBean<Medicines> pb = new PageBean<>();
+        PageHelper.startPage(pageNum,pageSize);
+        List<Medicines> as = evaluationMapper.medicinesList(state);
+        Page<Medicines> page = (Page<Medicines>) as;
+        pb.setTotal(page.getTotal());
+        pb.setItems(page.getResult());
+        return pb;
     }
 }

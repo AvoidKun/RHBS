@@ -1,6 +1,7 @@
 package com.avoid.phbs.service;
 
 import com.avoid.phbs.model.Evaluation;
+import com.avoid.phbs.model.Medicines;
 import com.avoid.phbs.model.PageBean;
 
 public interface EvaluationService {
@@ -15,4 +16,7 @@ public interface EvaluationService {
 
     //删
     void deleteById(Integer id);
+
+    //药物数据
+    PageBean<Medicines> medicinesList(Integer pageNum, Integer pageSize, String state);
 }
