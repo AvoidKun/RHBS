@@ -20,6 +20,11 @@ public class User {
     @NonNull
     @Pattern(regexp = "^\\S{1,10}$")
     private String nickname;//昵称
+    private String age;//年龄
+    @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+            message = "出生日期格式应为yyyy-MM-dd")
+    private String birth;//出生年月日
+    private String sex;//性别
     @NotEmpty
     @Email
     private String email;//邮件地址

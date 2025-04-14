@@ -61,4 +61,10 @@ public class AdviceController {
         PageBean<PhysiologicalData> physiological = adviceService.findUserPhysiologicalData(pageNum,pageSize,createUser,state);
         return Result.success(physiological);
     }
+
+   @GetMapping("/chart")
+    public Result<List<PhysiologicalData>> physiologicalChart(){
+        List<PhysiologicalData> physiological = adviceService.findPhysiologicalData();
+        return Result.success(physiological);
+   }
 }

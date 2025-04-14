@@ -69,6 +69,11 @@ public class AdviceServiceImpl implements AdviceService {
         return pp;
     }
 
+    @Override
+    public List<PhysiologicalData> findPhysiologicalData() {
+        return adviceMapper.findPhysiologicalData();
+    }
+
 }
 
 
