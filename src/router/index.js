@@ -15,6 +15,7 @@ import PhysiologicalChartVue from '@/view/physiologicalData/PhysiologicalChart.v
 import EvaluationManageVue from '@/view/evaluation/EvaluationManage.vue';
 import UserMedicinesVue from '@/view/medicines/UserMedicines.vue';
 import UserAnnouncementVue from '@/view/medicines/UserAnnouncement.vue';
+import AdviceUserVue from '@/view/Advice/AdviceUser.vue';
 
 
 import AdminCategoryVue from '@/view/category/AdminCategory.vue';
@@ -63,6 +64,9 @@ const routes = [
             },
             {
                 path:'/user/announcement',component:UserAnnouncementVue
+            },
+            {
+                path:'/user/advice',component:AdviceUserVue
             }
         ]
     },

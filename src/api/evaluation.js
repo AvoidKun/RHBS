@@ -27,3 +27,7 @@ export const evaluationCategoryListService =() =>{
 export const evaluationAnnouncementService=(params)=>{
     return request.get('/evaluation/announcement',{params:params})
 }
+//获取健康数据
+export const evaluationAdviceService=(params)=>{
+    return request.get("/evaluation/advice",{params:params})
+}
