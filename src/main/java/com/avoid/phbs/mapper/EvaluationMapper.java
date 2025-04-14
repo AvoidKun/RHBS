@@ -1,9 +1,6 @@
 package com.avoid.phbs.mapper;
 
-import com.avoid.phbs.model.Announcement;
-import com.avoid.phbs.model.AnnouncementCategory;
-import com.avoid.phbs.model.Evaluation;
-import com.avoid.phbs.model.Medicines;
+import com.avoid.phbs.model.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -34,4 +31,6 @@ public interface EvaluationMapper {
     List<AnnouncementCategory> categorylist();
 
     List<Announcement> announcementlist(Integer announcementCategoryId, String state);
+
+    List<Advice> advicelist(Integer userId, String state);
 }

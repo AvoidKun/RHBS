@@ -62,9 +62,20 @@ public class EvaluationController {
             Integer pageNum,
             Integer pageSize,
             @RequestParam(required = false) Integer announcementCategoryId,
-            @RequestParam(required = false) String state
+            @RequestParam( defaultValue= "已发布" ) String state
     ){
         PageBean<Announcement> pb = evaluationService.announcementlist(pageNum,pageSize,announcementCategoryId,state);
         return Result.success(pb);
     }
+    @GetMapping("/advice")
+    public Result<PageBean<Advice>> advicelist(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) Integer userId,
+            @RequestParam(defaultValue= "已发布") String state
+    ) {
+        PageBean<Advice> ap = evaluationService.advicelist(pageNum, pageSize, userId, state);
+        return Result.success(ap);
+    }
+
 }

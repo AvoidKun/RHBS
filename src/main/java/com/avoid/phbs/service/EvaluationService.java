@@ -25,4 +25,6 @@ public interface EvaluationService {
 
     //公告详情
     PageBean<Announcement> announcementlist(Integer pageNum, Integer pageSize, Integer announcementCategoryId, String state);
+    //建议列表
+    PageBean<Advice> advicelist(Integer pageNum, Integer pageSize, Integer userId, String state);
 }

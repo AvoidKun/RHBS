@@ -27,7 +27,18 @@
             <if test="announcementCategoryId!=null">
                 announcement_category_id=#{announcementCategoryId}
             </if>
-            <if test="state!=null">
+            <if test="state != null and state == '已发布'">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
+    <select id="advicelist" resultType="com.avoid.phbs.model.Advice">
+        select * from advice
+        <where>
+            <if test="userId!=null">
+                user_id=#{userId}
+            </if>
+            <if test="state != null and state == '已发布'">
                 and state=#{state}
             </if>
         </where>

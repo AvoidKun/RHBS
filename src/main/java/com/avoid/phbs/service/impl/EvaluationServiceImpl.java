@@ -83,4 +83,15 @@ public class EvaluationServiceImpl implements EvaluationService {
         pb.setItems(page.getResult());
         return pb;
     }
+
+    @Override
+    public PageBean<Advice> advicelist(Integer pageNum, Integer pageSize, Integer userId, String state) {
+        PageBean<Advice> ap = new PageBean<>();
+        PageHelper.startPage(pageNum,pageSize);
+        List<Advice> al = evaluationMapper.advicelist(userId,state);
+        Page<Advice> page = (Page<Advice>) al;
+        ap.setItems(page.getResult());
+        ap.setTotal(page.getTotal());
+        return ap;
+    }
 }
